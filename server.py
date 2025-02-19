@@ -43,6 +43,11 @@ def classify_emotion_X(text):
         logging.error(f"Error classifying emotion: {e}")
         return 'unknown'
 
+@app.route("/")  # Ensure the root route exists
+def home():
+    return "Speech Emotion Recognition API is running!"
+
+
 @app.route('/classify_text', methods=['POST'])
 def classify_emotion_endpoint():
     """API endpoint to classify emotion from transcribed text."""
@@ -101,4 +106,8 @@ def classify_emotion_Z():
 
     return jsonify({"audio_emotion": audio_emotion})
 
+if __name__ == "__main__":
+    import os
+    port = int(os.getenv("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
 
